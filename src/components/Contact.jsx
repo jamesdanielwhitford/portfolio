@@ -1,51 +1,35 @@
-import React, { useState } from 'react';
+import React from "react";
+import { useNavigate } from "react-router-dom";
+import "../index.css";
+import "../App.css";
 
 const Contact = () => {
-  const [name, setName] = useState('');
-  const [email, setEmail] = useState('');
-  const [message, setMessage] = useState('');
+  const navigate = useNavigate();
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    alert(`Message sent!\nName: ${name}\nEmail: ${email}\nMessage: ${message}`);
-    // Here you would normally handle sending the form data to your backend
+  const handleBack = () => {
+    navigate("/");
+  };
+
+  const handleEmail = () => {
+    window.location.href = "mailto:james.whitford0@gmail.com";
   };
 
   return (
-    <div className="flex flex-col items-center justify-center h-screen bg-gray-200 p-4">
-      <h1 className="text-2xl mb-4">Contact</h1>
-      <form onSubmit={handleSubmit} className="w-full max-w-md bg-white p-4 rounded shadow-md">
-        <div className="mb-4">
-          <label className="block text-gray-700">Name</label>
-          <input
-            type="text"
-            value={name}
-            onChange={(e) => setName(e.target.value)}
-            className="w-full p-2 border border-gray-300 rounded"
-            required
-          />
+    <div className="h-screen flex flex-col justify-start items-center space-y-6 bg-gray-200 text-center" style={{ paddingTop: '22vh' }}>
+      <h1 className="mb-10">Contact James Daniel Whitford through email:</h1>
+      <div className="space-y-6">
+        <div className="menu-item selected">
+          james.whitford0@gmail.com
         </div>
-        <div className="mb-4">
-          <label className="block text-gray-700">Email</label>
-          <input
-            type="email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            className="w-full p-2 border border-gray-300 rounded"
-            required
-          />
+      </div>
+      <div className="horizontal-buttons">
+        <button onClick={handleBack} className="minus-button">-</button>
+        <div className="arrow-buttons">
+          <button className="hidden">▲</button>
+          <button className="hidden">▼</button>
         </div>
-        <div className="mb-4">
-          <label className="block text-gray-700">Message</label>
-          <textarea
-            value={message}
-            onChange={(e) => setMessage(e.target.value)}
-            className="w-full p-2 border border-gray-300 rounded"
-            required
-          />
-        </div>
-        <button type="submit" className="w-full p-2 bg-blue-500 text-white rounded">Send Message</button>
-      </form>
+        <button onClick={handleEmail} className="plus-button">+</button>
+      </div>
     </div>
   );
 };
