@@ -20,6 +20,8 @@ const Contact = () => {
       handleArrowClick('up');
     } else if (event.key === 'Enter') {
       handleSelect();
+    } else if (event.key === 'Backspace') {
+      handleBack();
     }
   };
 

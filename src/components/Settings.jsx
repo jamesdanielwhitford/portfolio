@@ -20,6 +20,8 @@ const Settings = () => {
       handleArrowClick('up');
     } else if (event.key === 'Enter') {
       handleSelect();
+    } else if (event.key === 'Backspace') {
+      handleBack();
     }
   };
 

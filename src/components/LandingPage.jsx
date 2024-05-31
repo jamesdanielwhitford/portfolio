@@ -58,7 +58,7 @@ const LandingPage = () => {
         ))}
       </div>
       <div className="horizontal-buttons">
-        <button className="minus-button hidden">-</button> {/* Hidden minus button */}
+        <button className="minus-button hidden" style={{ visibility: 'hidden' }}>-</button> {/* Hidden minus button */}
         <div className="arrow-buttons">
           <button onClick={() => handleArrowClick('up')}>▲</button>
           <button onClick={() => handleArrowClick('down')}>▼</button>
