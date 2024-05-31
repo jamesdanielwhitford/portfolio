@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { storage, ref, listAll, getDownloadURL } from '../firebaseConfig';
+import '../index.css';
 
 const Blog = () => {
   const [projects, setProjects] = useState([]);
@@ -60,23 +61,62 @@ const Blog = () => {
     setCurrentIndex(0);
   };
 
+  const handleArrowClick = (direction) => {
+    if (direction === 'left') {
+      prevImage();
+    } else if (direction === 'right') {
+      nextImage();
+    } else if (direction === 'up') {
+      prevProject();
+    } else if (direction === 'down') {
+      nextProject();
+    }
+  };
+
+  const handleKeyDown = (event) => {
+    if (event.key === 'ArrowDown') {
+      handleArrowClick('down');
+    } else if (event.key === 'ArrowUp') {
+      handleArrowClick('up');
+    } else if (event.key === 'ArrowLeft') {
+      handleArrowClick('left');
+    } else if (event.key === 'ArrowRight') {
+      handleArrowClick('right');
+    } else if (event.key === 'Enter') {
+      // Handle select if needed
+    } else if (event.key === 'Backspace') {
+      // Handle back button if needed
+    }
+  };
+
+  useEffect(() => {
+    window.addEventListener('keydown', handleKeyDown);
+    return () => {
+      window.removeEventListener('keydown', handleKeyDown);
+    };
+  }, []);
+
   return (
-    <div className="flex flex-col items-center justify-center h-screen bg-gray-200">
-      {images.length > 0 ? (
-        <>
-          <img src={images[currentIndex]} alt="Project" className="max-w-full max-h-full" />
-          <div className="flex mt-4">
-            <button onClick={prevImage} className="p-2 mx-2 border">⬅️</button>
-            <button onClick={nextImage} className="p-2 mx-2 border">➡️</button>
+    <div className="h-screen bg-gray-200 container">
+      <div className="image-container">
+        {images.length > 0 ? (
+          <img src={images[currentIndex]} alt="Project" className="project-image" />
+        ) : (
+          <p>Loading images...</p>
+        )}
+      </div>
+      <div className="horizontal-buttons">
+        <button className="minus-button">-</button>
+        <div className="arrow-buttons">
+          <button onClick={() => handleArrowClick('left')} className="arrow-left">◀</button>
+          <div className="arrow-vertical">
+            <button onClick={() => handleArrowClick('up')}>▲</button>
+            <button onClick={() => handleArrowClick('down')}>▼</button>
           </div>
-          <div className="flex mt-4">
-            <button onClick={prevProject} className="p-2 mx-2 border">⬆️</button>
-            <button onClick={nextProject} className="p-2 mx-2 border">⬇️</button>
-          </div>
-        </>
-      ) : (
-        <p>Loading images...</p>
-      )}
+          <button onClick={() => handleArrowClick('right')} className="arrow-right">▶</button>
+        </div>
+        <button className="plus-button">+</button>
+      </div>
     </div>
   );
 };

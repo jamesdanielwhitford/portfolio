@@ -123,6 +123,19 @@ body {
   margin-right: 100px;
 }
 
+.image-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-grow: 1;
+  margin-bottom: 150px; /* Increase margin to prevent overlap with controls */
+}
+
+.project-image {
+  max-width: 100%;
+  max-height: calc(100vh - 200px); /* Adjust this value to prevent overlap with controls */
+}
+
 @media (prefers-color-scheme: light) {
   :root {
     color: #213547;
