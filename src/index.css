@@ -18,7 +18,6 @@
 body {
   margin: 0;
   display: flex;
-  flex-direction: column;
   justify-content: center;
   align-items: center;
   min-width: 320px;
@@ -31,11 +30,12 @@ body {
 .container {
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: space-between;
   align-items: center;
   height: 100vh;
-  width: 100vw;  /* Full width of the viewport */
+  width: 100vw;
   box-sizing: border-box;
+  padding: 20px;
 }
 
 .description {
@@ -46,26 +46,28 @@ body {
   word-wrap: break-word;
   position: absolute;
   top: 10%; /* Position near the first quarter of the screen */
+  left: 50%;
+  transform: translateX(-50%);
+  max-width: 600px; /* Center column width */
 }
 
 .menu-options {
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center; /* Center menu options vertically */
-  flex: 1; /* Allow it to take up remaining space */
-  transform: translateY(-50%);
   position: absolute;
   top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 }
 
 .menu-options button {
-  margin: 10px 0; /* Add space between buttons */
-  border: 2px solid transparent; /* Initial border to ensure layout */
+  margin: 10px 0;
+  border: 2px solid transparent;
 }
 
 .menu-options button.highlighted {
-  border: 2px solid black; /* Highlighted border */
+  border: 2px solid black;
 }
 
 .horizontal-buttons {
@@ -110,13 +112,6 @@ body {
 
 .minus-button {
   margin-right: 100px;
-}
-
-@media (min-width: 1024px) {
-  .menu-options {
-    top: 30%;
-    transform: translateY(0); /* Adjust to position higher on larger screens */
-  }
 }
 
 @media (prefers-color-scheme: light) {

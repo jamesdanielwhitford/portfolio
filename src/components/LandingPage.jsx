@@ -28,9 +28,9 @@ const LandingPage = () => {
     if (selected === 'Enter') {
       // Navigate to Enter
     } else if (selected === 'Contact') {
-      // Navigate to Contact
+      window.location.href = '/contact';
     } else if (selected === 'Settings') {
-      // Navigate to Settings
+      window.location.href = '/settings';
     }
   };
 
@@ -44,7 +44,7 @@ const LandingPage = () => {
   return (
     <div className="h-screen bg-gray-200 container">
       <div className="description">
-        This website contains information about the work and contact details of James Daniel Whitford.
+        This website contains information about the work <br></br>and contact details of James Daniel Whitford.
       </div>
       <div className="menu-options">
         {menuOptions.map((option, index) => (
