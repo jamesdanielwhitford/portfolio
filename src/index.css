@@ -33,7 +33,6 @@ h1 {
   line-height: 1.5;
   text-align: center;
   max-width: 600px;
-  margin-bottom: 2rem;
 }
 
 .selected {
@@ -71,6 +70,18 @@ h1 {
 
 .space-y-4 > :not([hidden]) ~ :not([hidden]) {
   margin-top: 1rem;
+}
+
+.description {
+  height: 100px; /* Fixed height for description section */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+.menu-options {
+  margin-top: 150px; /* Fixed starting position for menu options */
 }
 
 .arrow-buttons {
@@ -126,11 +137,4 @@ h1 {
 
 .minus-button {
   margin-right: 100px; /* Adjust for spacing to the left */
-}
-
-@media (prefers-color-scheme: light) {
-  :root {
-    color: #213547;
-    background-color: #ffffff;
-  }
 }

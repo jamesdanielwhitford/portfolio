@@ -7,33 +7,33 @@ function SettingsPage() {
   const menuOptions = ['Language', 'Controls', 'Filters', 'Style'];
   const navigate = useNavigate();
 
-  const handleKeyDown = (event) => {
-    if (event.key === 'ArrowDown') {
-      setSelectedOption((prevOption) => (prevOption + 1) % menuOptions.length);
-    } else if (event.key === 'ArrowUp') {
+  const handleSelectOption = () => {
+    // Implement navigation or action for each menu option
+  };
+
+  const handleKeyPress = (event) => {
+    if (event.key === 'ArrowUp') {
       setSelectedOption((prevOption) => (prevOption - 1 + menuOptions.length) % menuOptions.length);
+    } else if (event.key === 'ArrowDown') {
+      setSelectedOption((prevOption) => (prevOption + 1) % menuOptions.length);
     } else if (event.key === 'Enter') {
       handleSelectOption();
     }
   };
 
-  const handleSelectOption = () => {
-    const option = menuOptions[selectedOption];
-    if (option === 'Language') {
-      // Implement language settings functionality here
-    } else if (option === 'Controls') {
-      // Implement controls settings functionality here
-    } else if (option === 'Filters') {
-      // Implement filters settings functionality here
-    } else if (option === 'Style') {
-      // Implement style settings functionality here
-    }
-  };
+  React.useEffect(() => {
+    window.addEventListener('keydown', handleKeyPress);
+    return () => {
+      window.removeEventListener('keydown', handleKeyPress);
+    };
+  }, [selectedOption]);
 
   return (
-    <div onKeyDown={handleKeyDown} tabIndex="0" className="flex-col items-center justify-center h-screen">
-      <h1 className="text-center mb-8">Settings</h1>
-      <div className="space-y-4">
+    <div className="h-screen flex-col items-center justify-center">
+      <div className="description text-center">
+        <h1>Settings</h1>
+      </div>
+      <div className="menu-options space-y-4">
         {menuOptions.map((option, index) => (
           <div
             key={index}
