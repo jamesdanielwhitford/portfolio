@@ -1,27 +1,71 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import '../App.css';
 
 function ContactPage() {
+  const [selectedOption, setSelectedOption] = useState(0);
+  const menuOptions = ['james.whitford0@gmail.com'];
   const navigate = useNavigate();
+
+  const handleSelectOption = () => {
+    if (selectedOption === 0) {
+      window.location.href = 'mailto:james.whitford0@gmail.com';
+    }
+  };
+
+  const handleKeyPress = (event) => {
+    if (event.key === 'ArrowUp') {
+      setSelectedOption((prevOption) => (prevOption - 1 + menuOptions.length) % menuOptions.length);
+    } else if (event.key === 'ArrowDown') {
+      setSelectedOption((prevOption) => (prevOption + 1) % menuOptions.length);
+    } else if (event.key === 'Enter') {
+      handleSelectOption();
+    }
+  };
+
+  React.useEffect(() => {
+    window.addEventListener('keydown', handleKeyPress);
+    return () => {
+      window.removeEventListener('keydown', handleKeyPress);
+    };
+  }, [selectedOption]);
 
   return (
     <div className="h-screen flex-col items-center justify-center">
-      <div className="description text-center">
+      <div className="description">
         <h1>Contact James Daniel Whitford through email:</h1>
       </div>
       <div className="menu-options space-y-4">
-        <div className="text-center selected">
-          james.whitford0@gmail.com
-        </div>
+        {menuOptions.map((option, index) => (
+          <div
+            key={index}
+            className={`text-center ${selectedOption === index ? 'selected' : ''}`}
+            onClick={() => {
+              setSelectedOption(index);
+              handleSelectOption();
+            }}
+          >
+            {option}
+          </div>
+        ))}
       </div>
       <div className="horizontal-buttons">
         <button className="minus-button" onClick={() => navigate('/')}>-</button>
         <div className="arrow-buttons">
-          <button className="hidden">▲</button>
-          <button className="hidden">▼</button>
+          <button
+            onClick={() => setSelectedOption((prevOption) => (prevOption - 1 + menuOptions.length) % menuOptions.length)}
+            disabled={selectedOption === 0}
+          >
+            ▲
+          </button>
+          <button
+            onClick={() => setSelectedOption((prevOption) => (prevOption + 1) % menuOptions.length)}
+            disabled={selectedOption === menuOptions.length - 1}
+          >
+            ▼
+          </button>
         </div>
-        <button className="plus-button" onClick={() => window.location.href = 'mailto:james.whitford0@gmail.com'}>+</button>
+        <button className="plus-button" onClick={handleSelectOption}>+</button>
       </div>
     </div>
   );

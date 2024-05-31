@@ -29,10 +29,25 @@ body {
 }
 
 h1 {
-  font-size: 1.2rem;
+  font-size: 1.5rem;
   line-height: 1.5;
   text-align: center;
-  max-width: 600px;
+  margin-bottom: 2rem;
+}
+
+.description {
+  height: 120px; /* Fixed height for the description area */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+.menu-options {
+  margin-top: 20px; /* Consistent margin from description area */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .selected {
@@ -40,20 +55,6 @@ h1 {
   padding: 0.2rem;
   width: fit-content;
   margin: 0 auto;
-}
-
-.flex-col {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
-.items-center {
-  align-items: center;
-}
-
-.justify-center {
-  justify-content: center;
 }
 
 .h-screen {
@@ -64,24 +65,8 @@ h1 {
   background-color: #d3d3d3;
 }
 
-.text-center {
-  text-align: center;
-}
-
 .space-y-4 > :not([hidden]) ~ :not([hidden]) {
   margin-top: 1rem;
-}
-
-.description {
-  height: 100px; /* Fixed height for description section */
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-}
-
-.menu-options {
-  margin-top: 150px; /* Fixed starting position for menu options */
 }
 
 .arrow-buttons {
@@ -96,7 +81,7 @@ h1 {
   align-items: center;
   justify-content: center;
   position: fixed;
-  bottom: 5%; /* Adjusted to move up the screen */
+  bottom: 5%;
   left: 50%;
   transform: translateX(-50%);
 }
@@ -132,9 +117,16 @@ h1 {
 }
 
 .plus-button {
-  margin-left: 100px; /* Adjust for spacing to the right */
+  margin-left: 100px;
 }
 
 .minus-button {
-  margin-right: 100px; /* Adjust for spacing to the left */
+  margin-right: 100px;
+}
+
+@media (prefers-color-scheme: light) {
+  :root {
+    color: #213547;
+    background-color: #ffffff;
+  }
 }

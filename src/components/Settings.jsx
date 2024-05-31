@@ -8,7 +8,22 @@ function SettingsPage() {
   const navigate = useNavigate();
 
   const handleSelectOption = () => {
-    // Implement navigation or action for each menu option
+    switch (selectedOption) {
+      case 0:
+        navigate('/language');
+        break;
+      case 1:
+        navigate('/controls');
+        break;
+      case 2:
+        navigate('/filters');
+        break;
+      case 3:
+        navigate('/style');
+        break;
+      default:
+        break;
+    }
   };
 
   const handleKeyPress = (event) => {
@@ -30,7 +45,7 @@ function SettingsPage() {
 
   return (
     <div className="h-screen flex-col items-center justify-center">
-      <div className="description text-center">
+      <div className="description">
         <h1>Settings</h1>
       </div>
       <div className="menu-options space-y-4">

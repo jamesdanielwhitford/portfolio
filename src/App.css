@@ -10,7 +10,7 @@
   align-items: center;
   justify-content: center;
   position: fixed;
-  bottom: 5%; /* Adjusted to move up the screen */
+  bottom: 5%;
   left: 50%;
   transform: translateX(-50%);
 }
@@ -46,9 +46,9 @@
 }
 
 .plus-button {
-  margin-left: 100px; /* Adjust for spacing to the right */
+  margin-left: 100px;
 }
 
 .minus-button {
-  margin-right: 100px; /* Adjust for spacing to the left */
+  margin-right: 100px;
 }

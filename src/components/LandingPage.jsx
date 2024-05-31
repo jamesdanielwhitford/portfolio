@@ -42,7 +42,7 @@ function LandingPage() {
 
   return (
     <div className="h-screen flex-col items-center justify-center">
-      <div className="description text-center">
+      <div className="description">
         <h1>This website contains information about the work and contact details of James Daniel Whitford.</h1>
       </div>
       <div className="menu-options space-y-4">
