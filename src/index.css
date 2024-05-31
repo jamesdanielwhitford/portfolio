@@ -85,7 +85,7 @@ h1 {
   align-items: center;
   justify-content: center;
   position: fixed;
-  bottom: 15%;
+  bottom: 5%; /* Adjusted to move up the screen */
   left: 50%;
   transform: translateX(-50%);
 }
@@ -121,11 +121,11 @@ h1 {
 }
 
 .plus-button {
-  margin-left: 100px;
+  margin-left: 100px; /* Adjust for spacing to the right */
 }
 
 .minus-button {
-  margin-right: 100px;
+  margin-right: 100px; /* Adjust for spacing to the left */
 }
 
 @media (prefers-color-scheme: light) {
