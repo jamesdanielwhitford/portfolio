@@ -19,7 +19,7 @@ body {
   margin: 0;
   display: flex;
   flex-direction: column;
-  justify-content: flex-start; /* Changed from center to flex-start */
+  justify-content: flex-start;
   align-items: center;
   min-width: 320px;
   min-height: 100vh;
@@ -85,7 +85,7 @@ h1 {
   align-items: center;
   justify-content: center;
   position: fixed;
-  bottom: 20%; /* Adjusted to move up the screen */
+  bottom: 15%;
   left: 50%;
   transform: translateX(-50%);
 }
@@ -98,14 +98,13 @@ h1 {
   align-items: center;
   background-color: transparent;
   border: 1px solid black;
-  border-radius: 50%; /* Added border-radius for circular buttons */
+  border-radius: 50%;
   cursor: pointer;
   font-size: 1.2rem;
 }
 
-.arrow-buttons button.invisible {
-  opacity: 0;
-  pointer-events: none;
+.arrow-buttons button.hidden {
+  visibility: hidden;
 }
 
 .plus-button, .minus-button {
@@ -116,19 +115,18 @@ h1 {
   align-items: center;
   background-color: transparent;
   border: 1px solid black;
-  border-radius: 50%; /* Added border-radius for circular buttons */
+  border-radius: 50%;
   cursor: pointer;
   margin: 0 20px;
 }
 
 .plus-button {
-  margin-left: 100px; /* Adjust for spacing to the right */
+  margin-left: 100px;
 }
 
 .minus-button {
-  margin-right: 100px; /* Adjust for spacing to the left */
+  margin-right: 100px;
 }
-
 
 @media (prefers-color-scheme: light) {
   :root {

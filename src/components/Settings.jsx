@@ -1,80 +1,73 @@
-import React, { useState } from 'react';
+import React from 'react';
+import { useNavigate } from 'react-router-dom';
 
-const Settings = () => {
-  const [language, setLanguage] = useState('English');
-  const [controls, setControls] = useState({
-    keyboard: true,
-    screen: false,
-    voice: false,
-    camera: false,
-  });
+const SettingsPage = () => {
+  const navigate = useNavigate();
+  const [selectedOption, setSelectedOption] = React.useState(0);
+  const options = ["Language", "Controls", "Filters", "Style"];
 
-  const handleControlChange = (control) => {
-    setControls((prevControls) => ({
-      ...prevControls,
-      [control]: !prevControls[control],
-    }));
+  const handleKeyDown = (event) => {
+    if (event.key === "ArrowDown") {
+      setSelectedOption((prevOption) => (prevOption + 1) % options.length);
+    } else if (event.key === "ArrowUp") {
+      setSelectedOption((prevOption) => (prevOption - 1 + options.length) % options.length);
+    } else if (event.key === "Enter") {
+      handleOptionSelect();
+    }
   };
 
+  const handleOptionSelect = () => {
+    const selected = options[selectedOption];
+    // Implement navigation or actions for each option here
+  };
+
+  React.useEffect(() => {
+    window.addEventListener("keydown", handleKeyDown);
+    return () => {
+      window.removeEventListener("keydown", handleKeyDown);
+    };
+  }, []);
+
+  const isTopMostItem = selectedOption === 0;
+  const isBottomMostItem = selectedOption === options.length - 1;
+
   return (
-    <div className="flex flex-col items-center justify-center h-screen bg-gray-100 p-4">
-      <div className="w-full max-w-md bg-white p-8 rounded-lg shadow-lg">
-        <h1 className="text-2xl mb-6 text-center">Settings</h1>
-        <div className="mb-6">
-          <h2 className="text-xl mb-2">Language</h2>
-          <select
-            value={language}
-            onChange={(e) => setLanguage(e.target.value)}
-            className="w-full p-3 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
+    <div className="flex-col h-screen bg-gray-200 text-center">
+      <div className="space-y-4">
+        <h1 className="mb-12 mt-48">Settings</h1>
+        {options.map((option, index) => (
+          <div
+            key={option}
+            className={`${
+              index === selectedOption ? "selected" : ""
+            }`}
           >
-            <option value="English">English</option>
-            <option value="Spanish">Spanish</option>
-            <option value="Chinese">Chinese</option>
-            <option value="French">French</option>
-          </select>
+            {option}
+          </div>
+        ))}
+      </div>
+      <div className="horizontal-buttons">
+        <button className="minus-button" onClick={() => navigate(-1)}>-</button>
+        <div className="arrow-buttons">
+          <button
+            className="up-button"
+            style={{ visibility: isTopMostItem ? 'hidden' : 'visible' }}
+            onClick={() => setSelectedOption((prevOption) => (prevOption - 1 + options.length) % options.length)}
+          >
+            ▲
+          </button>
+          <button
+            className="down-button"
+            style={{ visibility: isBottomMostItem ? 'hidden' : 'visible' }}
+            onClick={() => setSelectedOption((prevOption) => (prevOption + 1) % options.length)}
+          >
+            ▼
+          </button>
         </div>
-        <div>
-          <h2 className="text-xl mb-2">Controls</h2>
-          <div className="flex items-center mb-2">
-            <input
-              type="checkbox"
-              checked={controls.keyboard}
-              onChange={() => handleControlChange('keyboard')}
-              className="mr-2"
-            />
-            <label>Keyboard</label>
-          </div>
-          <div className="flex items-center mb-2">
-            <input
-              type="checkbox"
-              checked={controls.screen}
-              onChange={() => handleControlChange('screen')}
-              className="mr-2"
-            />
-            <label>Screen</label>
-          </div>
-          <div className="flex items-center mb-2">
-            <input
-              type="checkbox"
-              checked={controls.voice}
-              onChange={() => handleControlChange('voice')}
-              className="mr-2"
-            />
-            <label>Voice</label>
-          </div>
-          <div className="flex items-center mb-2">
-            <input
-              type="checkbox"
-              checked={controls.camera}
-              onChange={() => handleControlChange('camera')}
-              className="mr-2"
-            />
-            <label>Camera</label>
-          </div>
-        </div>
+        <button className="plus-button" onClick={handleOptionSelect}>+</button>
       </div>
     </div>
   );
 };
 
-export default Settings;
+export default SettingsPage;
