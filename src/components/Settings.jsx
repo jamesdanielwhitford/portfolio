@@ -1,87 +1,72 @@
-import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import '../App.css';
+import React, { useState, useEffect, useRef } from 'react';
+import '../index.css';
 
-function SettingsPage() {
+const Settings = () => {
   const [selectedOption, setSelectedOption] = useState(0);
-  const menuOptions = ['Language', 'Controls', 'Filters', 'Style'];
-  const navigate = useNavigate();
+  const menuOptions = ['Change Password', 'Update Email', 'Notification Preferences'];
 
-  const handleSelectOption = () => {
-    switch (selectedOption) {
-      case 0:
-        navigate('/language');
-        break;
-      case 1:
-        navigate('/controls');
-        break;
-      case 2:
-        navigate('/filters');
-        break;
-      case 3:
-        navigate('/style');
-        break;
-      default:
-        break;
-    }
+  const handleArrowClick = (direction) => {
+    setSelectedOption((prev) =>
+      direction === 'down'
+        ? (prev + 1) % menuOptions.length
+        : (prev - 1 + menuOptions.length) % menuOptions.length
+    );
   };
 
-  const handleKeyPress = (event) => {
-    if (event.key === 'ArrowUp') {
-      setSelectedOption((prevOption) => (prevOption - 1 + menuOptions.length) % menuOptions.length);
-    } else if (event.key === 'ArrowDown') {
-      setSelectedOption((prevOption) => (prevOption + 1) % menuOptions.length);
+  const handleKeyDown = (event) => {
+    if (event.key === 'ArrowDown') {
+      handleArrowClick('down');
+    } else if (event.key === 'ArrowUp') {
+      handleArrowClick('up');
     } else if (event.key === 'Enter') {
-      handleSelectOption();
+      handleSelect();
     }
   };
 
-  React.useEffect(() => {
-    window.addEventListener('keydown', handleKeyPress);
+  const handleSelect = () => {
+    const selected = menuOptions[selectedOption];
+    if (selected === 'Change Password') {
+      // Handle Change Password action
+    } else if (selected === 'Update Email') {
+      // Handle Update Email action
+    } else if (selected === 'Notification Preferences') {
+      // Handle Notification Preferences action
+    }
+  };
+
+  useEffect(() => {
+    window.addEventListener('keydown', handleKeyDown);
     return () => {
-      window.removeEventListener('keydown', handleKeyPress);
+      window.removeEventListener('keydown', handleKeyDown);
     };
   }, [selectedOption]);
 
   return (
-    <div className="h-screen flex-col items-center justify-center">
+    <div className="h-screen bg-gray-200 container">
       <div className="description">
-        <h1>Settings</h1>
+        This page allows you to configure your settings.
       </div>
-      <div className="menu-options space-y-4">
+      <div className="menu-options">
         {menuOptions.map((option, index) => (
-          <div
-            key={index}
-            className={`text-center ${selectedOption === index ? 'selected' : ''}`}
-            onClick={() => {
-              setSelectedOption(index);
-              handleSelectOption();
-            }}
+          <button
+            key={option}
+            className={index === selectedOption ? 'highlighted' : ''}
+            onClick={() => setSelectedOption(index)}
           >
             {option}
-          </div>
+          </button>
         ))}
       </div>
       <div className="horizontal-buttons">
-        <button className="minus-button" onClick={() => navigate('/')}>-</button>
+        <button className="minus-button">-</button>
         <div className="arrow-buttons">
-          <button
-            onClick={() => setSelectedOption((prevOption) => (prevOption - 1 + menuOptions.length) % menuOptions.length)}
-            disabled={selectedOption === 0}
-          >
-            ▲
-          </button>
-          <button
-            onClick={() => setSelectedOption((prevOption) => (prevOption + 1) % menuOptions.length)}
-            disabled={selectedOption === menuOptions.length - 1}
-          >
-            ▼
-          </button>
+          <button onClick={() => handleArrowClick('up')}>▲</button>
+          <button onClick={() => handleArrowClick('down')}>▼</button>
         </div>
-        <button className="plus-button" onClick={handleSelectOption}>+</button>
+        <button className="plus-button" onClick={handleSelect}>+</button>
       </div>
     </div>
   );
-}
+};
 
-export default SettingsPage;
+export default Settings;

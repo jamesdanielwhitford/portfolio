@@ -1,74 +1,72 @@
-import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import '../App.css';
+import React, { useState, useEffect } from 'react';
+import '../index.css';
 
-function ContactPage() {
+const Contact = () => {
   const [selectedOption, setSelectedOption] = useState(0);
-  const menuOptions = ['james.whitford0@gmail.com'];
-  const navigate = useNavigate();
+  const menuOptions = ['Email', 'Phone', 'Social Media'];
 
-  const handleSelectOption = () => {
-    if (selectedOption === 0) {
-      window.location.href = 'mailto:james.whitford0@gmail.com';
-    }
+  const handleArrowClick = (direction) => {
+    setSelectedOption((prev) =>
+      direction === 'down'
+        ? (prev + 1) % menuOptions.length
+        : (prev - 1 + menuOptions.length) % menuOptions.length
+    );
   };
 
-  const handleKeyPress = (event) => {
-    if (event.key === 'ArrowUp') {
-      setSelectedOption((prevOption) => (prevOption - 1 + menuOptions.length) % menuOptions.length);
-    } else if (event.key === 'ArrowDown') {
-      setSelectedOption((prevOption) => (prevOption + 1) % menuOptions.length);
+  const handleKeyDown = (event) => {
+    if (event.key === 'ArrowDown') {
+      handleArrowClick('down');
+    } else if (event.key === 'ArrowUp') {
+      handleArrowClick('up');
     } else if (event.key === 'Enter') {
-      handleSelectOption();
+      handleSelect();
     }
   };
 
-  React.useEffect(() => {
-    window.addEventListener('keydown', handleKeyPress);
+  const handleSelect = () => {
+    const selected = menuOptions[selectedOption];
+    if (selected === 'Email') {
+      // Handle Email action
+    } else if (selected === 'Phone') {
+      // Handle Phone action
+    } else if (selected === 'Social Media') {
+      // Handle Social Media action
+    }
+  };
+
+  useEffect(() => {
+    window.addEventListener('keydown', handleKeyDown);
     return () => {
-      window.removeEventListener('keydown', handleKeyPress);
+      window.removeEventListener('keydown', handleKeyDown);
     };
   }, [selectedOption]);
 
   return (
-    <div className="h-screen flex-col items-center justify-center">
+    <div className="h-screen bg-gray-200 container">
       <div className="description">
-        <h1>Contact James Daniel Whitford through email:</h1>
+        This page contains contact information.
       </div>
-      <div className="menu-options space-y-4">
+      <div className="menu-options">
         {menuOptions.map((option, index) => (
-          <div
-            key={index}
-            className={`text-center ${selectedOption === index ? 'selected' : ''}`}
-            onClick={() => {
-              setSelectedOption(index);
-              handleSelectOption();
-            }}
+          <button
+            key={option}
+            className={index === selectedOption ? 'highlighted' : ''}
+            onClick={() => setSelectedOption(index)}
           >
             {option}
-          </div>
+          </button>
         ))}
       </div>
       <div className="horizontal-buttons">
-        <button className="minus-button" onClick={() => navigate('/')}>-</button>
+        <button className="minus-button">-</button>
         <div className="arrow-buttons">
-          <button
-            onClick={() => setSelectedOption((prevOption) => (prevOption - 1 + menuOptions.length) % menuOptions.length)}
-            disabled={selectedOption === 0}
-          >
-            ▲
-          </button>
-          <button
-            onClick={() => setSelectedOption((prevOption) => (prevOption + 1) % menuOptions.length)}
-            disabled={selectedOption === menuOptions.length - 1}
-          >
-            ▼
-          </button>
+          <button onClick={() => handleArrowClick('up')}>▲</button>
+          <button onClick={() => handleArrowClick('down')}>▼</button>
         </div>
-        <button className="plus-button" onClick={handleSelectOption}>+</button>
+        <button className="plus-button" onClick={handleSelect}>+</button>
       </div>
     </div>
   );
-}
+};
 
-export default ContactPage;
+export default Contact;
