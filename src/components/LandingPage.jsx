@@ -6,6 +6,10 @@ const LandingPage = () => {
   const menuOptions = ['Enter', 'Contact', 'Settings'];
 
   const handleArrowClick = (direction) => {
+    if (direction === 'left' || direction === 'right') {
+      // No functionality for left and right arrows on the landing page
+      return;
+    }
     setSelectedOption((prev) =>
       direction === 'down'
         ? (prev + 1) % menuOptions.length
@@ -20,6 +24,8 @@ const LandingPage = () => {
       handleArrowClick('up');
     } else if (event.key === 'Enter') {
       handleSelect();
+    } else if (event.key === 'Backspace') {
+      // No back functionality on the landing page
     }
   };
 
@@ -60,8 +66,12 @@ const LandingPage = () => {
       <div className="horizontal-buttons">
         <button className="minus-button hidden" style={{ visibility: 'hidden' }}>-</button> {/* Hidden minus button */}
         <div className="arrow-buttons">
-          <button onClick={() => handleArrowClick('up')}>▲</button>
-          <button onClick={() => handleArrowClick('down')}>▼</button>
+          <button onClick={() => handleArrowClick('left')} className="arrow-left">◀</button>
+          <div className="arrow-vertical">
+            <button onClick={() => handleArrowClick('up')}>▲</button>
+            <button onClick={() => handleArrowClick('down')}>▼</button>
+          </div>
+          <button onClick={() => handleArrowClick('right')} className="arrow-right">▶</button>
         </div>
         <button className="plus-button" onClick={handleSelect}>+</button>
       </div>

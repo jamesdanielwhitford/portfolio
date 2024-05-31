@@ -6,6 +6,10 @@ const Settings = () => {
   const menuOptions = ['Change Password', 'Update Email', 'Notification Preferences'];
 
   const handleArrowClick = (direction) => {
+    if (direction === 'left' || direction === 'right') {
+      // No functionality for left and right arrows on the settings page
+      return;
+    }
     setSelectedOption((prev) =>
       direction === 'down'
         ? (prev + 1) % menuOptions.length
@@ -66,8 +70,12 @@ const Settings = () => {
       <div className="horizontal-buttons">
         <button className="minus-button" onClick={handleBack}>-</button>
         <div className="arrow-buttons">
-          <button onClick={() => handleArrowClick('up')}>▲</button>
-          <button onClick={() => handleArrowClick('down')}>▼</button>
+          <button onClick={() => handleArrowClick('left')} className="arrow-left">◀</button>
+          <div className="arrow-vertical">
+            <button onClick={() => handleArrowClick('up')}>▲</button>
+            <button onClick={() => handleArrowClick('down')}>▼</button>
+          </div>
+          <button onClick={() => handleArrowClick('right')} className="arrow-right">▶</button>
         </div>
         <button className="plus-button" onClick={handleSelect}>+</button>
       </div>
