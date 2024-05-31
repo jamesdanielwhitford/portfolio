@@ -44,7 +44,7 @@ const LandingPage = () => {
   return (
     <div className="h-screen bg-gray-200 container">
       <div className="description">
-        This website contains information about the work <br></br>and contact details of James Daniel Whitford.
+        This website contains information about the work and contact details of James Daniel Whitford.
       </div>
       <div className="menu-options">
         {menuOptions.map((option, index) => (
@@ -58,7 +58,7 @@ const LandingPage = () => {
         ))}
       </div>
       <div className="horizontal-buttons">
-        <button className="minus-button">-</button>
+        <button className="minus-button hidden">-</button> {/* Hidden minus button */}
         <div className="arrow-buttons">
           <button onClick={() => handleArrowClick('up')}>▲</button>
           <button onClick={() => handleArrowClick('down')}>▼</button>

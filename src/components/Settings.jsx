@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect } from 'react';
 import '../index.css';
 
 const Settings = () => {
@@ -34,6 +34,10 @@ const Settings = () => {
     }
   };
 
+  const handleBack = () => {
+    window.history.back();
+  };
+
   useEffect(() => {
     window.addEventListener('keydown', handleKeyDown);
     return () => {
@@ -58,7 +62,7 @@ const Settings = () => {
         ))}
       </div>
       <div className="horizontal-buttons">
-        <button className="minus-button">-</button>
+        <button className="minus-button" onClick={handleBack}>-</button>
         <div className="arrow-buttons">
           <button onClick={() => handleArrowClick('up')}>▲</button>
           <button onClick={() => handleArrowClick('down')}>▼</button>

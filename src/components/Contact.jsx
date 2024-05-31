@@ -34,6 +34,10 @@ const Contact = () => {
     }
   };
 
+  const handleBack = () => {
+    window.history.back();
+  };
+
   useEffect(() => {
     window.addEventListener('keydown', handleKeyDown);
     return () => {
@@ -58,7 +62,7 @@ const Contact = () => {
         ))}
       </div>
       <div className="horizontal-buttons">
-        <button className="minus-button">-</button>
+        <button className="minus-button" onClick={handleBack}>-</button>
         <div className="arrow-buttons">
           <button onClick={() => handleArrowClick('up')}>▲</button>
           <button onClick={() => handleArrowClick('down')}>▼</button>
