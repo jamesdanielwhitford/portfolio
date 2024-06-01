@@ -32,7 +32,7 @@ const LandingPage = () => {
   const handleSelect = () => {
     const selected = menuOptions[selectedOption];
     if (selected === 'Enter') {
-      // Navigate to Enter
+      window.location.href = '/blog'; // Navigate to blog
     } else if (selected === 'Contact') {
       window.location.href = '/contact';
     } else if (selected === 'Settings') {
@@ -57,7 +57,10 @@ const LandingPage = () => {
           <button
             key={option}
             className={index === selectedOption ? 'highlighted' : ''}
-            onClick={() => setSelectedOption(index)}
+            onClick={() => {
+              setSelectedOption(index);
+              handleSelect();
+            }}
           >
             {option}
           </button>

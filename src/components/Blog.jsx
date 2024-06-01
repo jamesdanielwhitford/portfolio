@@ -85,7 +85,7 @@ const Blog = () => {
     } else if (event.key === 'Enter') {
       // Handle select if needed
     } else if (event.key === 'Backspace') {
-      // Handle back button if needed
+      window.location.href = '/'; // Go back to landing page
     }
   };
 
@@ -106,7 +106,7 @@ const Blog = () => {
         )}
       </div>
       <div className="horizontal-buttons">
-        <button className="minus-button">-</button>
+        <button className="minus-button" onClick={() => (window.location.href = '/')}>-</button>
         <div className="arrow-buttons">
           <button onClick={() => handleArrowClick('left')} className="arrow-left">◀</button>
           <div className="arrow-vertical">
